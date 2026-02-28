@@ -1,0 +1,12 @@
+# R project files
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj.user/
+
+# Claude files
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
