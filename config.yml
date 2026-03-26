@@ -1,0 +1,28 @@
+  # ==========================================================================
+# Autolaunch Paper - Model Configuration
+# ==========================================================================
+# All model parameters in one place. Load with yaml::read_yaml("config.yml")
+# Changing values here will propagate through the entire analysis pipeline.
+
+# Spatial framework
+spatial:
+  grid_resolution_m: 500
+  crs_epsg: 26915          # UTM Zone 15N
+  buffer_km: 100           # Buffer around MN border
+
+# Helicopter parameters
+helicopter:
+  airspeed_knots: 145      # AW119Kx cruise speed
+  lift_min: 10             # LiftTime_H: activation to airborne
+  # evaluation_min:        # TBD - air crew on-scene time
+  # auxiliary_scene_min:   # TBD - landing/takeoff at scene
+  # transfer_min:          # TBD - offload at hospital
+
+# Ground parameters
+ground:
+  # evaluation_min:        # TBD - on-scene assessment before HEMS activation
+  # transfer_min:          # TBD - offload at hospital
+
+# Activation scenarios
+activation:
+  evaluation_delay_min: 10  # Ground crew on-scene assessment before HEMS activation
