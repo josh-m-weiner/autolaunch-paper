@@ -1,28 +1,104 @@
-  # ==========================================================================
+# ==========================================================================
 # Autolaunch Paper - Model Configuration
 # ==========================================================================
 # All model parameters in one place. Load with yaml::read_yaml("config.yml")
 # Changing values here will propagate through the entire analysis pipeline.
 
+# --------------------------------------------------------------------------
 # Spatial framework
+# --------------------------------------------------------------------------
 spatial:
   grid_resolution_m: 500
   crs_epsg: 26915          # UTM Zone 15N
   buffer_km: 100           # Buffer around MN border
 
+# --------------------------------------------------------------------------
 # Helicopter parameters
+# --------------------------------------------------------------------------
+# Full air timeline (from helicopter activation to patient at hospital):
+#   LiftTime + ResponseFlight + AuxSceneTime + EvalTime + LoadedFlight + TransferTime
 helicopter:
   airspeed_knots: 145      # AW119Kx cruise speed
-  lift_min: 10             # LiftTime_H: activation to airborne
-  # evaluation_min:        # TBD - air crew on-scene time
-  # auxiliary_scene_min:   # TBD - landing/takeoff at scene
-  # transfer_min:          # TBD - offload at hospital
+  lift_min:       10       # Activation to airborne (spin-up, liftoff)
+  eval_min:       10       # Air crew on-scene time (skid-to-skid)
+  aux_scene_min:  3        # Landing approach + liftoff at scene
+  transfer_min:   5        # Offload at receiving hospital
 
+# --------------------------------------------------------------------------
 # Ground parameters
+# --------------------------------------------------------------------------
+# Full ground timeline (from 911 call to patient at hospital):
+#   ResponseTime + EvalTime + OnSceneTime + LoadedDriveTime + TransferTime
+# NOTE: ResponseTime_G comes from the EMSRB county data (dispatch notified
+#   to scene arrival), which already includes mobilization time.
+# EvalTime and OnSceneTime are sequential (Option B): crew evaluates first,
+#   then packages/loads. HEMS activation (in "after assessment" scenario)
+#   fires at the end of eval_min.
 ground:
-  # evaluation_min:        # TBD - on-scene assessment before HEMS activation
-  # transfer_min:          # TBD - offload at hospital
+  eval_min:       7.5      # On-scene evaluation/assessment
+  on_scene_min:   7.5      # Packaging, stabilizing, loading (after eval)
+  transfer_min:   2        # Offload at receiving hospital
+  response_metric: median  # Which EMSRB metric: "median", "avg", or "p90"
 
+# --------------------------------------------------------------------------
 # Activation scenarios
+# --------------------------------------------------------------------------
+# Three scenarios for when the helicopter is activated relative to 911 call:
+#   1. After assessment: ActivationTime = ResponseTime_G + eval_delay_min
+#   2. Upon arrival:     ActivationTime = ResponseTime_G
+#   3. Autolaunch:       ActivationTime = 0
 activation:
-  evaluation_delay_min: 10  # Ground crew on-scene assessment before HEMS activation
+  eval_delay_min: 7.5      # Matches ground.eval_min — HEMS called after eval
+
+# --------------------------------------------------------------------------
+# OSM road speed lookup (km/h)
+# --------------------------------------------------------------------------
+# Speeds assigned to OSM highway tags for ground routing.
+# These represent typical EMS driving speeds (below posted limits).
+osm_speeds:
+  motorway: 105
+  motorway_link: 80
+  trunk: 90
+  trunk_link: 70
+  primary: 80
+  primary_link: 60
+  secondary: 65
+  secondary_link: 50
+  tertiary: 55
+  tertiary_link: 40
+  residential: 40
+  unclassified: 50
+  living_street: 20
+  service: 25
+
+# --------------------------------------------------------------------------
+# Weather / wind
+# --------------------------------------------------------------------------
+weather:
+  source: iowa_mesonet      # ASOS/AWOS data via IEM
+  states:                    # States to pull station data from
+    - MN
+    - WI
+    - IA
+    - SD
+    - ND
+  years: [2019, 2020, 2021, 2022, 2023]
+  min_completeness: 0.80    # Exclude stations with < 80% annual data
+  interpolation: idw        # Interpolation method (idw or kriging)
+
+# --------------------------------------------------------------------------
+# Sensitivity parameter ranges
+# --------------------------------------------------------------------------
+sensitivity:
+  airspeed_knots: [120, 130, 140, 145, 150, 160, 170]
+  lift_min: [5, 8, 10, 12, 15]
+  eval_delay_min: [5, 10, 15, 20]
+  road_speed_multiplier: [0.8, 0.9, 1.0, 1.1, 1.2]
+  response_metric: [median, avg, p90]
+
+# --------------------------------------------------------------------------
+# Unit conversions (reference only — not read by code)
+# --------------------------------------------------------------------------
+units:
+  knots_to_m_per_min: 30.867
+  cell_area_sq_m: 250000   # 500m x 500m
