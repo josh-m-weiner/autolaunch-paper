@@ -1,0 +1,88 @@
+county,median_mobilization_min,avg_mobilization_min,p90_mobilization_min
+Aitkin,1,2.45,6
+Anoka,0,0.58,1
+Becker,0,0.98,3
+Beltrami,1,1.18,2
+Benton,1,0.67,2
+Big Stone,6,6.61,11
+Blue Earth,1,1.28,2
+Brown,2,3.01,6
+Carlton,2,2.60,6
+Carver,1,1.00,2
+Cass,1,1.94,4
+Chippewa,4,4.95,9
+Chisago,1,1.13,3
+Clay,0,0.62,1
+Clearwater,0,0.74,2
+Cook,3,5.31,11.40
+Cottonwood,5,5.84,8.80
+Crow Wing,1,0.99,2
+Dakota,1,0.85,2
+Dodge,3,4.06,8
+Douglas,1,1.64,3
+Faribault,4,4.69,8
+Fillmore,5,5.30,9
+Freeborn,1,0.93,2
+Goodhue,2,2.43,5
+Grant,5,5.95,10
+Hennepin,0,0.47,1
+Houston,3,3.50,8
+Hubbard,1,1.16,2
+Isanti,1,1.01,2
+Itasca,2,3.02,6
+Jackson,4,5.04,9
+Kanabec,2,2.46,5
+Kandiyohi,2,2.60,6
+Kittson,8,8.35,15
+Koochiching,2,4.89,11
+Lac qui Parle,4,6.70,11
+Lake,3,3.80,6
+Lake of the Woods,6,8.30,19
+Le Sueur,2,2.87,6
+Lincoln,4,5.48,10
+Lyon,2,3.06,7
+Mahnomen,3,4.34,8
+Marshall,4,4.46,8
+Martin,1,1.76,5
+McLeod,1,1.29,3
+Meeker,1,1.77,6
+Mille Lacs,1,1.00,2
+Morrison,1,1.04,2
+Mower,1,1.72,5
+Murray,5,6.23,9
+Nicollet,1,1.11,2
+Nobles,2,3.90,7
+Norman,3,2.97,5
+Olmsted,0,0.79,2
+Otter Tail,2,2.30,5
+Pennington,0,0.66,1
+Pine,2,1.75,3
+Pipestone,4,4.36,8
+Polk,2,2.87,6
+Pope,2,1.87,4
+Ramsey,1,1.28,2
+Red Lake,4,4.99,9
+Redwood,3,3.43,7
+Renville,6,6.37,11
+Rice,1,0.81,2
+Rock,2,3.46,8.20
+Roseau,3,3.84,7
+Scott,1,0.89,2
+Sherburne,1,2.08,9
+Sibley,3,3.33,7
+St. Louis,1,1.73,5
+Stearns,0,1.20,4
+Steele,1,1.08,2
+Stevens,4,3.86,7
+Swift,6,6.56,10
+Todd,3,3.68,7
+Traverse,4,4.99,8
+Wabasha,2,2.64,6
+Wadena,1,1.05,2
+Waseca,1,1.75,4
+Washington,0,0.59,2
+Watonwan,5,5.51,9.40
+Wilkin,3,4.16,8
+Winona,1,2.02,5
+Wright,1,1.98,5
+Yellow Medicine,4,4.34,7
